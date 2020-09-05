@@ -23,10 +23,13 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: installing node
-        run: echo Hello, world!
+        run: actions/setup-node@v2-beta
+        with:
+          node-version: 12
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: installing surge
+        run: npm install --global surge 
+      - name: dploy web 
+        run: surge ./aug.surge.sh --token $ {{secrets.SURGE_TOKEN}}
+          
